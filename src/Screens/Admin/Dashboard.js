@@ -28,9 +28,9 @@ const Dashboard = props => {
           </View>
           <Text style={[style.title, { marginLeft: 15 }]}>Rp.120.000.000</Text>
         </View>
-        <View style={style.card2}>
+        {/* <View style={style.card2}> */}
           <Charts />
-        </View>
+        {/* </View> */}
       </View>
     </ScrollView>
   );

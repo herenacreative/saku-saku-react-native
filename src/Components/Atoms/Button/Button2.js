@@ -5,7 +5,7 @@ import style from './style';
 const Button2 = props => {
   return (
     <Animatable.View animation='slideInDown' duration={1000}>
-      <TouchableOpacity onPress={props.onPress} activeColor={red}>
+      <TouchableOpacity onPress={props.onPress} activeColor="red">
         <LinearGradient
           style={style.button2}
           colors={[color.default, color.primary]}

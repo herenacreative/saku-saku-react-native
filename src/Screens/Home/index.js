@@ -12,7 +12,8 @@ const Home = () => {
       <ScrollView>
         <View style={style.topNav}>
           <CardPhotoTextPrimary
-            name='Samuel Suhi'
+            // onPress={() => navigation.navigate('Profile')}
+            name={<Text onPress={() => navigation.navigate('Profile')}>sint</Text>}
             detail='+62 1231 1213'
             count={<Ionicons name='notifications-outline' onPress={() => navigation.navigate('Notif')} size={30} color={color.light} />}
           />

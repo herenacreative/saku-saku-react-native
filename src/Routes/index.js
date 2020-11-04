@@ -217,19 +217,41 @@ const Routes = () => {
 };
 
 const DrawerNavigator = () => (
-  <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Navigator 
+    drawerContentOptions={{
+      activeTintColor: color.primary,
+      itemStyle: { marginVertical: 10 },
+    }}
+    initialRouteName="Home"
+  >
     <Stack.Screen
       name="Home"
       component={Home}
+      options={{
+        headerShown: false,
+        drawerIcon: ({ color, size }) => (
+          <Ionicons name='grid-outline' size={25} color={color} />
+        )
+      }}
     />
     <Drawer.Screen
       name="Transaction"
       component={Transaction}
+      options={{
+        drawerIcon: ({ color, size }) => (
+          <Ionicons name='cash-outline' size={25} color={color} />
+        )
+      }}
     />
     <Drawer.Screen
       name="Profile"
       component={Profile}
-      options={{ headerShown: false }}
+      options={{ 
+        headerShown: false,
+        drawerIcon: ({ color, size }) => (
+          <Ionicons name='people-outline' size={25} color={color} />
+        )
+      }}
     />
   </Drawer.Navigator>
 );
