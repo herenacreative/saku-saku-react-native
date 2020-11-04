@@ -7,6 +7,7 @@ import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
 // import {persistStore, persisReducer} from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
@@ -41,6 +42,7 @@ export {
     useNavigation,
     
     // @react-navigation / stack
+    createBottomTabNavigator,
     createStackNavigator,
     createDrawerNavigator,
 

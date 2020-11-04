@@ -28,7 +28,7 @@ const Auth = () => {
               title="Login"
               style="primary"
               type="fullwidth"
-              onPress={() => navigation.navigate('TopUpAdmin')}
+              onPress={() => navigation.navigate('Dashboard')}
             />
           </View>
         }

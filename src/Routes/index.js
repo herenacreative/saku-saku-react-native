@@ -1,9 +1,11 @@
 import 'react-native-gesture-handler';
 import {
   React,
+  Ionicons,
   NavigationContainer,
   createStackNavigator,
   createDrawerNavigator,
+  createBottomTabNavigator,
 } from 'Libraries';
 import { color } from 'Assets';
 import { 
@@ -40,6 +42,7 @@ import {
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
+const Tab = createBottomTabNavigator();
 
 const Routes = () => {
   return (
@@ -164,27 +167,27 @@ const Routes = () => {
             title: 'Manage Phone Number'
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="TopUpAdmin"
           component={TopUpAdmin}
           options={{
             headerShown: false
           }}
-        />
+        /> */}
         <Stack.Screen
           name="Dashboard"
-          component={Dashboard}
+          component={MyTabs}
           options={{
             headerShown: false
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="UserAdmin"
           component={UserAdmin}
           options={{
             headerShown: false
           }}
-        />
+        /> */}
         <Stack.Screen
           name="DetailUser"
           component={DetailUser}
@@ -192,13 +195,13 @@ const Routes = () => {
             title: 'Detail User'
           }}
         />
-        <Stack.Screen
+        {/* <Stack.Screen
           name="TransactionAdmin"
           component={TransactionAdmin}
           options={{
             headerShown: false,
           }}
-        />
+        /> */}
         <Stack.Screen
           name="DetailTransaction"
           component={DetailTransaction}
@@ -206,7 +209,7 @@ const Routes = () => {
             title: 'Detail Transaction'
           }}
         />
-        <Stack.Screen name="About" component={About}/>
+        {/* <Stack.Screen name="About" component={About}/> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -230,5 +233,60 @@ const DrawerNavigator = () => (
     />
   </Drawer.Navigator>
 );
+
+const MyTabs = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName="Dashboard"
+      tabBarOptions={{
+        inactiveTintColor: color.default,
+        activeTintColor: color.darkblue,
+        inactiveBackgroundColor: color.darkblue,
+        activeBackgroundColor: color.primary,
+      }}
+    >
+      <Tab.Screen
+        name="Dashboard"
+        component={Dashboard}
+        options={{
+          tabBarLabel: 'Dashboard',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='grid-outline' size={25} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TransactionAdmin"
+        component={TransactionAdmin}
+        options={{
+          tabBarLabel: 'Transaction',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='wallet-outline' size={25} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="UserAdmin"
+        component={UserAdmin}
+        options={{
+          tabBarLabel: 'User Admin',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='people-outline' size={25} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="TopUpAdmin"
+        component={TopUpAdmin}
+        options={{
+          tabBarLabel: 'Top Up',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name='add-outline' size={25} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 export default Routes;
