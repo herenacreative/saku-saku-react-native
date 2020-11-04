@@ -6,6 +6,10 @@ const style = StyleSheet.create({
         backgroundColor: color.dark2,
         minHeight: Dimensions.get('window').height + 30,
     },
+    container1: {
+        backgroundColor: color.default,
+        minHeight: Dimensions.get('window').height + 30,
+    },
     container2: {
         width: Dimensions.get('window').width - 30,
         backgroundColor: color.darkblue,
@@ -37,7 +41,7 @@ const style = StyleSheet.create({
     search: {
         flexDirection: 'row',
         alignItems: 'center',
-        margin: 15,
+        marginTop: 15,
         borderWidth: 1,
         backgroundColor: color.light,
         borderRadius: 10,
@@ -50,13 +54,12 @@ const style = StyleSheet.create({
     },
     row:{
         flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     topNav:{
         backgroundColor: color.darkblue,
         borderBottomRightRadius: 20,
         padding: 15,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
     },
      headline: {
          fontSize: 24,
@@ -106,7 +109,7 @@ const style = StyleSheet.create({
     //modal
     modalContainer: {
         width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height - 300,
+        height: Dimensions.get('window').height - 330,
         padding: 15,
         position: 'absolute',
         bottom: 0,
@@ -136,7 +139,39 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         fontFamily: 'JustAnotherHand-Regular',
 
-    }
+    },
+    modalsCard:{
+        width: Dimensions.get('window').width- 30,
+        marginVertical: 30,
+        // backgroundColor: color.light,
+        borderRadius: 10,
+    },
+    desc:{
+        color: color.primary,
+        fontSize: 16,
+        paddingTop: 10,
+        // paddingHorizontal: 10,
+    },
+    search2: {
+        // flexDirection: 'row',
+        // alignItems: 'center',
+        // marginTop: 15,
+        borderWidth: 1,
+        backgroundColor: color.light,
+        borderRadius: 10,
+        // paddingBottom: 10,
+        borderColor: color.light,
+    },
+    textSearch2: {
+        // marginHorizontal: 5,
+        color: color.darkblue,
+        borderBottomColor: color.primary,
+        borderBottomWidth: 1,
+        marginBottom: 10,
+        backgroundColor: color.default,
+        fontSize: 16,
+        borderRadius: 10,
+    },
 });
 
 export default style;

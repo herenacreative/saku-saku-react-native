@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
 // import {persistStore, persisReducer} from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
+import DateRangePicker from "react-native-daterange-picker";
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen';
@@ -66,6 +67,7 @@ export {
     thunk,
     Ionicons,
     SplashScreen,
+    DateRangePicker,
 };
 
 export * from 'react';

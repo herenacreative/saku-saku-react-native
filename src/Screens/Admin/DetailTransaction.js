@@ -7,12 +7,12 @@ import style from './style';
 const DetailTransaction = props => {
     const { num, desc } = props;
     return (
-        <View style={style.container}>
+        <View style={style.container1}>
             <StatusBar backgroundColor={color.primary} barStyle="light-content" />
             <Image
                 style={style.img}
                 source={{
-                    uri: 'https://reactnative.dev/img/tiny_logo.png',
+                    uri: 'https://images.unsplash.com/photo-1604304194650-3ba3cfa752fd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1575&q=80',
                 }}
             />
             <View style={style.card3}>

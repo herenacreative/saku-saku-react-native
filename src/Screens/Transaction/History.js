@@ -1,15 +1,21 @@
-import { Ionicons, StatusBar, React, Text, View, TouchableOpacity, useNavigation, SafeAreaView, ScrollView } from 'Libraries';
+import { Ionicons, DateRangePicker, StatusBar, React, Text, View, moment, TouchableOpacity, useNavigation, useState, ScrollView, Modal } from 'Libraries';
 import { CardPhotoText } from 'Components';
 import style from './style';
 import { color } from 'Assets';
 
 const History = () => {
 	const navigation = useNavigation();
+	const [startDate, setStartDate] = useState(null);
+	const [endDate, setEndDate] = useState(null);
+	const [displayedDate, setDisplayedDate] = useState(moment())
+	const [dates, setDates] = useState({...dates})
+	const [modalVisibleAdd, setModalVisibleAdd] = useState(false);
 
 	return (
-		<SafeAreaView style={style.container}>
+		<ScrollView>
+			<>
+		<View style={style.container}>
 			<StatusBar backgroundColor={color.primary} barStyle="light-content" />
-			<ScrollView>
 				<Text style={style.subtitlePadding}>This Week</Text>
 				<CardPhotoText
 					name='Samuel Suhi'
@@ -43,12 +49,43 @@ const History = () => {
 							<Ionicons name='arrow-down-outline' size={20} color='green' />
 						</TouchableOpacity>
 					</View>
-					<TouchableOpacity style={style.btnSmall2}>
+					<TouchableOpacity 
+						onPress={() => {
+							setModalVisibleAdd(true);
+						}}
+					style={style.btnSmall2}>
 						<Text style={style.text}>Filter by Date</Text>
 					</TouchableOpacity>
 				</View>
-			</ScrollView>
-		</SafeAreaView>
+
+				
+			</View>
+			{/* modal Add */}
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisibleAdd}
+			>
+				<TouchableOpacity style={style.modalFade} onPress={() => setModalVisibleAdd(false)}>
+				</TouchableOpacity>
+				<View style={style.modalContainer}>
+					<View style={style.scrollTit}>
+					</View>
+					<View style={style.modalsCard}>
+								<DateRangePicker
+									onChange={setDates}
+									endDate={endDate}
+									startDate={startDate}
+									displayedDate={displayedDate}
+									range
+								>
+								<Text style={style.textModal}>Click Date</Text>
+								</DateRangePicker>
+					</View>
+				</View>
+			</Modal>
+			</>
+		</ScrollView>
 	);
 };
 

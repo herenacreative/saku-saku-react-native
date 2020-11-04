@@ -1,7 +1,7 @@
 import { CardPhotoText, CardIcons, Charts } from 'Components';
 import {TouchableOpacity, React, Text, View, useNavigation, SafeAreaView, ScrollView, Ionicons} from 'Libraries';
 import style from './style';
-Charts
+
 const Transaction = () => {
   const navigation = useNavigation();
 

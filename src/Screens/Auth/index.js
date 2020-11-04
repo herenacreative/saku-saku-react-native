@@ -28,7 +28,7 @@ const Auth = () => {
               title="Login"
               style="primary"
               type="fullwidth"
-              onPress={() => navigation.navigate('Dashboard')}
+              onPress={() => navigation.navigate('Home')}
             />
           </View>
         }

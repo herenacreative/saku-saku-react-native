@@ -171,7 +171,48 @@ const style = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 10,
-    }
+    },
+    //modal
+    modalContainer: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height - 200,
+        padding: 15,
+        position: 'absolute',
+        bottom: 0,
+        backgroundColor: color.darkblue,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
+    },
+    scrollTit: {
+        width: 80,
+        height: 6,
+        margin: 15,
+        alignSelf: 'center',
+        borderRadius: 20,
+        backgroundColor: color.primary,
+    },
+    modalFade: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        backgroundColor: color.dark,
+        opacity: 0.6,
+    },
+    textModal: {
+        paddingVertical: 15,
+        color: color.primary,
+        textAlign: 'center',
+        fontSize: 24,
+        fontWeight: 'bold',
+        fontFamily: 'JustAnotherHand-Regular',
+
+    },
+    modalsCard: {
+        width: Dimensions.get('window').width - 30,
+        borderRadius: 10,
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+    },
 });
 
 export default style;

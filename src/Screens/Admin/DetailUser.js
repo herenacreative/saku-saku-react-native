@@ -1,12 +1,13 @@
-import { React, Text, TextInput, useState, StatusBar, TouchableOpacity, Image, Modal, View } from 'Libraries';
+import { React, Text, ScrollView, TextInput, useState, StatusBar, TouchableOpacity, Image, Modal, View } from 'Libraries';
 import { color } from 'Assets';
 import { Button, CardText } from 'Components';
 import style from './style';
 
 const DetailUser = props => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisibleEdit, setModalVisibleEdit] = useState(false);
   return (
-    <View style={style.container}>
+    <ScrollView>
+    <View style={style.container1}>
       <StatusBar backgroundColor={color.primary} barStyle="light-content" />
       <Image
         style={style.img}
@@ -31,30 +32,43 @@ const DetailUser = props => {
           style="primary"
           type="fullwidth"
           onPress={() => {
-            setModalVisible(true);
+            setModalVisibleEdit(true);
           }}
         />
       </View>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-      >
-        <TouchableOpacity style={style.modalFade} onPress={() => setModalVisible(false)}>
-        </TouchableOpacity>
-        <View style={style.modalContainer}>
-          <View style={style.scrollTit}>
-            <Text style={style.textModal}>Update</Text>
+        {/* modal update */}
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisibleEdit}
+        >
+          <TouchableOpacity style={style.modalFade} onPress={() => setModalVisibleEdit(false)}>
+          </TouchableOpacity>
+          <View style={style.modalContainer}>
+            <View style={style.scrollTit}>
+              <Text style={style.textModal}>Update</Text>
+            </View>
             <View style={style.modalsCard}>
-              <Text> hahahah </Text>
-              <Text> hahahah </Text>
-              <Text> hahahah </Text>
+              <View>
+                <Text style={style.desc}>Number</Text>
+                <TextInput style={style.textSearch2} placeholder="Input Number" />
+              </View>
+              <View>
+                <Text style={style.desc}>Number</Text>
+                <TextInput style={style.textSearch2} placeholder="Input Number" />
+              </View>
+              <Button
+                title='Submit'
+                style="primary"
+                type="fullwidth"
+              />
             </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
+
     </View>
+    </ScrollView>
   );
 };
 

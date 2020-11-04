@@ -269,7 +269,7 @@ const MyTabs = () => {
         name="UserAdmin"
         component={UserAdmin}
         options={{
-          tabBarLabel: 'User Admin',
+          tabBarLabel: 'Users',
           tabBarIcon: ({ color, size }) => (
             <Ionicons name='people-outline' size={25} color={color} />
           ),
