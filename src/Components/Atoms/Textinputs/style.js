@@ -1,5 +1,4 @@
-import { Dimensions, StyleSheet } from 'Libraries';
-import { color } from 'Assets';
+import { StyleSheet } from 'Libraries';
 
 const style = StyleSheet.create({
     action:{
@@ -20,7 +19,7 @@ const style = StyleSheet.create({
     },
     icons:{
         marginTop: 10,
-    }
+    },
 });
 
 export default style

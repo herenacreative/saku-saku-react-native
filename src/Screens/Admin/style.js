@@ -32,6 +32,12 @@ const style = StyleSheet.create({
         color: color.light,
         fontWeight: 'bold',
     },
+    helperText: {
+        fontSize: 16,
+        color: color.darkblue,
+        marginLeft: 10,
+        flex: 3,
+    },
     helperTextPadding: {
         fontSize: 16,
         color: color.light,
@@ -58,7 +64,7 @@ const style = StyleSheet.create({
     },
     topNav:{
         backgroundColor: color.darkblue,
-        borderBottomRightRadius: 20,
+        borderBottomRightRadius: 45,
         padding: 15,
     },
      headline: {

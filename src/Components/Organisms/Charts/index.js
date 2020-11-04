@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, StackedBarChart } from 'react-native-svg-charts'
 
-const colors = ['#33691E', '#689F38', '#9CCC65', '#DCEDC8']
+const colors = ['#1D2345', '#2B3468', '#39458B', '#6379F4']
 const data = [
     {
         broccoli: {

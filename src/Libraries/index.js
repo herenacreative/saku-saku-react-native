@@ -9,12 +9,16 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import * as Animatable from 'react-native-animatable';
-// import {persistStore, persisReducer} from 'redux-persist';
+import {persistStore, persistReducer} from 'redux-persist';
 // import storage from 'redux-persist/lib/storage';
+import { PersistGate } from "redux-persist/integration/react";
 import DateRangePicker from "react-native-daterange-picker";
 import LinearGradient from 'react-native-linear-gradient';
+import promiseMiddleware from 'redux-promise-middleware';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen';
+import { Provider } from 'react-redux';
+import { connect } from 'react-redux';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import moment from 'moment';
@@ -51,10 +55,13 @@ export {
     applyMiddleware,
     createStore,
     combineReducers,
+    Provider,
+    connect,
 
-    //redux-persist
-    // persistStore,
-    // persisReducer,
+    // redux-persist
+    persistStore,
+    persistReducer,
+    PersistGate,
 
     //utils
     axios,
@@ -68,6 +75,7 @@ export {
     Ionicons,
     SplashScreen,
     DateRangePicker,
+    promiseMiddleware,
 };
 
 export * from 'react';

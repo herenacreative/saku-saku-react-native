@@ -1,13 +1,18 @@
 import { Button2} from 'Components';
-import { Switch, Image, StatusBar, Text, React, useState, View, useNavigation, ScrollView, Ionicons } from 'Libraries';
+import { Switch, Image, connect, Text, React, useState, View, useNavigation, ScrollView, Ionicons } from 'Libraries';
 import style from './style';
 import { color } from 'Assets';
+import { logout } from 'Redux/actions';
 
-const Profile = () => {
+const Profile = props => {
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const onSubmit = () => {
+    props.logout();
+    navigation.navigate('Auth');
+  }
   return (
     <ScrollView>
       <View style={style.container}>
@@ -49,7 +54,7 @@ const Profile = () => {
           />}
         />
         <Button2
-          onPress={() => navigation.navigate('Auth')}
+          onPress={onSubmit}
           title='Logout'
         />
       </View>
@@ -57,4 +62,10 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+const mapDispatchToProps = { logout }
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

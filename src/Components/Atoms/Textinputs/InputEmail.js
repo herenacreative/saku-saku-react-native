@@ -3,37 +3,36 @@ import style from './style';
 import { color } from 'Assets';
 
 const InputEmail = (props) => {
-  const { onChange, value } = props;
+  const { onChangeText, value } = props;
   const [data, setData] = React.useState({
     check_textInputChange: false,
     isValidUser: true,
   });
 
-  const handleValidUser = (val) => {
-    if (val.trim().length >= 3) {
-      setData({
-        ...data,
-        isValidUser: true,
+  // const handleValidUser = (val) => {
+  //   if (val.trim().length >= 3) {
+  //     setData({
+  //       ...data,
+  //       isValidUser: true,
 
-        check_textInputChange: true,
-      });
-    } else {
-      setData({
-        ...data,
-        isValidUser: false,
+  //       check_textInputChange: true,
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       isValidUser: false,
 
-        check_textInputChange: true,
-      });
-    }
-  };
+  //       check_textInputChange: true,
+  //     });
+  //   }
+  // };
 
   return (
     <View>
       <View style={style.action}>
         <Ionicons style={style.icons} name='mail-outline' size={25} color={color.primary} />
         <TextInput
-          onchange={onChange}
-          onChangeText={(val) => handleValidUser(val)}
+          onChangeText={onChangeText}
           value={value}
           placeholderTextColor='#666666'
           placeholder='Enter your e-mail'

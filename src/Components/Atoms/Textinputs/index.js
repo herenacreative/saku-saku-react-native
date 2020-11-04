@@ -3,28 +3,28 @@ import style from './style';
 import { color } from 'Assets';
 
 const InputPassword = (props) => {
-  const { onChange, value } = props;
+  const { onChangeText, value } = props;
   const [data, setData] = React.useState({
     check_textInputChange: false,
     secureTextEntry: true,
     isValidPassword: true,
   });
 
-  const handlePasswordChange = (val) => {
-    if (val.trim().length >= 3) {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: true
-      });
-    } else {
-      setData({
-        ...data,
-        password: val,
-        isValidPassword: false
-      });
-    }
-  };
+  // const handlePasswordChange = (val) => {
+  //   if (val.trim().length >= 3) {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: true
+  //     });
+  //   } else {
+  //     setData({
+  //       ...data,
+  //       password: val,
+  //       isValidPassword: false
+  //     });
+  //   }
+  // };
 
   const updateSecureTextEntry = () => {
     setData({
@@ -38,8 +38,7 @@ const InputPassword = (props) => {
       <View style={style.action}>
         <Ionicons style={style.icons} name='lock-closed-outline' size={25} color={color.primary} />
         <TextInput
-          onchange={onChange}
-          onChangeText={(val) => handlePasswordChange(val)}
+          onChangeText={onChangeText}
           value={value}
           placeholderTextColor='#666666'
           placeholder='Enter your password'

@@ -20,6 +20,9 @@
             "Redux": [
                 "./Redux"
             ],
+            "Redux/actions": [
+                "./Redux/actions"
+            ],
             "Screens": [
                 "./Screens"
             ],

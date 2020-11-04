@@ -1,23 +1,28 @@
+import { connect, useEffect, StatusBar, React, Text, View, useNavigation, ScrollView, Ionicons} from 'Libraries';
 import { Button, CardPhotoText, CardPhotoTextPrimary } from 'Components';
-import { SafeAreaView, StatusBar, React, Text, View, useNavigation, ScrollView, Ionicons} from 'Libraries';
 import style from './style';
 import { color } from 'Assets';
 
-const Home = () => {
+const Home = (props) => {
   const navigation = useNavigation();
 
+  useEffect(() => {
+    console.log('props:', props)
+  }, [])
+
   return (
-    <SafeAreaView style={style.container}>
+    <ScrollView>
+    <View style={style.container}>
       <StatusBar backgroundColor={color.primary} barStyle="light-content" />
-      <ScrollView>
         <View style={style.topNav}>
           <CardPhotoTextPrimary
             // onPress={() => navigation.navigate('Profile')}
-            name={<Text onPress={() => navigation.navigate('Profile')}>sint</Text>}
-            detail='+62 1231 1213'
+  name={<Text onPress={() => navigation.navigate('Profile')}>{props.auth.data.fullname}</Text>}
+            detail={props.auth.data.phone}
             count={<Ionicons name='notifications-outline' onPress={() => navigation.navigate('Notif')} size={30} color={color.light} />}
           />
         </View>
+
         <View style={style.between}>
           <Button
             title='Transfer'
@@ -35,20 +40,22 @@ const Home = () => {
         <Text style={style.subtitlePadding}>
           Transaction History
         </Text>
-        <CardPhotoText
-          name='Samuel Suhi'
-          detail='+62 1231 1213'
-          count='Rp.200.000'
-        />
-      </ScrollView>
-      </SafeAreaView>
-    // <View>
-    //   <CardPhoto/>
-    //   <Ionicons name='close' size={20} color='red' />
-    //   <Text style={style.btnPrimary}>ini Home</Text>
-    //   <Button title="About" onPress={() => navigation.navigate('About')} />
-    // </View>
+        {props.transfer.data.map(item => (
+          <CardPhotoText
+            name={item.receiver_id}
+            detail={item.amount}
+            count={item.balance}
+          />
+
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  transfer: state.transfer
+});
+
+export default connect(mapStateToProps)(Home);

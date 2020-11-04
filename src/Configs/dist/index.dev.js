@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports["default"]=void 0;var config={baseURL:'http://192.168.1.3:8080/saku-saku/api/v1',imgURL:'http://192.168.1.3:8080/saku-saku/images'};var _default=config;exports["default"]=_default;
