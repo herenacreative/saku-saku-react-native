@@ -6,7 +6,7 @@ const TopUpAdmin = props => {
   const [modalVisible, setModalVisible] = useState(false);
   const [activeModal, setActiveModal] = useState('');
 
-  const handleUpdate = (e) =>{
+  const handleUpdate = (e) => {
     setActiveModal(e);
     setModalVisible(false);
   }
@@ -33,7 +33,7 @@ const TopUpAdmin = props => {
               setModalVisible(true);
             }}
           >
-          <Ionicons name='pencil-outline' size={20} color={color.primary} />
+            <Ionicons name='pencil-outline' size={20} color={color.primary} />
           </TouchableHighlight>
           <Ionicons name='trash-outline' style={{ paddingLeft: 20 }} size={20} color={color.primary} />
         </View>
@@ -44,7 +44,7 @@ const TopUpAdmin = props => {
         transparent={true}
         visible={modalVisible}
       >
-        <TouchableOpacity style={style.modalFade} onPress={()=>setModalVisible(false)}>
+        <TouchableOpacity style={style.modalFade} onPress={() => setModalVisible(false)}>
         </TouchableOpacity>
         <View style={style.modalContainer}>
           <View style={style.scrollTit}>
@@ -57,7 +57,7 @@ const TopUpAdmin = props => {
           </View>
         </View>
       </Modal>
-      
+
     </View>
   );
 };
