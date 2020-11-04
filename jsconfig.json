@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "baseUrl": "./src",
+        "sourceMap": true,
+        "paths": {
+            "Assets": [
+                "./Assets"
+            ],
+            "Components": [
+                "./Components"
+            ],
+            "Configs": [
+                "./Configs"
+            ],
+            "Libraries": [
+                "./Libraries"
+            ],
+            "Redux": [
+                "./Redux"
+            ],
+            "Screens": [
+                "./Screens"
+            ],
+            "Utils": [
+                "./Utils"
+            ]
+            // "Components/Molecules": [
+            //     "./Components/Molecules"
+            // ],
+            // "Components/Atoms": [
+            //     "./Components/Atoms"
+            // ],
+            // "Components/Organisms": [
+            //     "./Components/Organisms"
+            // ],
+        }
+    }
+}

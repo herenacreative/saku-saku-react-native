@@ -1,0 +1,1 @@
+"use strict";Object.defineProperty(exports,"__esModule",{value:true});exports.color=void 0;var color={dark:'#3A3D42',light:'#FFF',primary:'#6379F4',"default":'#e0e4fd',error:'#FF5B37',darkblue:'#1F2240',dark2:'#16182C'};exports.color=color;
