@@ -1,10 +1,28 @@
-import { React, Text, View, TextInput, Ionicons, useNavigation, SafeAreaView, ScrollView, StatusBar } from 'Libraries';
+import { React, useState, useEffect, connect, Text, View, TextInput, Ionicons, useNavigation, SafeAreaView, ScrollView, StatusBar } from 'Libraries';
 import { CardPhotoText } from 'Components';
+import { getAllUsers } from 'Redux/actions';
 import style from './style';
 import { color } from 'Assets';
 
-const Search = () => {
+const Search = (props) => {
   const navigation = useNavigation();
+  const [user, setUser] = useState([]);
+
+  const getAllUser = async () => {
+    const token = props.auth.data.tokenLogin;
+    await props.dispatch(getAllUsers(token))
+      .then(res => {
+        setUser(res.value.data.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
+    getAllUser();
+    console.log(props, 'pp')
+  }, []);
 
   return (
     <SafeAreaView style={style.container}>
@@ -33,4 +51,11 @@ const Search = () => {
   );
 };
 
-export default Search;
+
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  users: state.users,
+});
+
+export default connect(mapStateToProps)(Search);
+

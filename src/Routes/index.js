@@ -113,6 +113,9 @@ const Routes = (props) => {
                 <Stack.Screen
                   name="TopUp"
                   component={TopUp}
+                  options={{
+                    title: 'Top Up'
+                  }}
                 />
                 <Stack.Screen
                   name="Notif"

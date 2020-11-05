@@ -1,24 +1,54 @@
-import { CardPhotoText, CardText, CardList, CardIcons, Button, CardPhoto } from 'Components';
-import { React, Text, View, TextInput, TouchableOpacity, useNavigation, SafeAreaView, ScrollView } from 'Libraries';
+import { React, useEffect, useState, connect, Text, View, useNavigation, SafeAreaView, ScrollView } from 'Libraries';
+import { CardList, CardPhoto } from 'Components';
+import { getAllTopUp } from 'Redux/actions';
 import style from './style';
+import Add from '../../Assets/Images/logo.svg';
 
-const TopUp = () => {
-  const navigation = useNavigation();
+const TopUp = (props) => {
+  // const navigation = useNavigation();
+  const [topups, setTopups] = useState([]);
+
+  useEffect(() => {
+    const token = props.auth.data.tokenLogin;
+
+    props.dispatch(getAllTopUp(token))
+      .then(res => {
+        console.log(res.value.data, ":res")
+        setTopups(res.value.data.data[0]);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <SafeAreaView style={style.container}>
       <ScrollView>
         <View style={style.topNav}>
           <CardPhoto
-            count='Samuel Suhi'
-            detail='+62 1231 1213'
+            image={<Add width={50} height={50} />}
+            detail='Virtual Account Number'
+            count='2389 081393877946'
           />
         </View>
         <Text style={style.subtitlePadding}>How to Top-Up</Text>
-        <CardList num='1' desc='Type the virtual account number that we provide you at the top.' />
+        {props.topUp.data.map((item, idx) => {
+          return (
+            <CardList
+              id={idx}
+              num={item.num}
+              desc={item.description}
+            />
+          )
+        })}
       </ScrollView>
     </SafeAreaView>
   );
 };
 
-export default TopUp;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  topUp: state.topUp,
+});
+
+export default connect(mapStateToProps)(TopUp);

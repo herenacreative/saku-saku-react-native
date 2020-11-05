@@ -3,6 +3,7 @@ import style from './style';
 
 const CardList = props => {
     const {num, desc} = props;
+    
     return (
         <TouchableOpacity style={style.container2}>
             <Text style={style.textPrimary}>{num}</Text>

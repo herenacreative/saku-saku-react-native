@@ -1,6 +1,11 @@
 import { color } from 'Assets';
-import {StyleSheet, Dimensions} from 'Libraries';
+import { StyleSheet, Dimensions } from 'Libraries';
+
 const style = StyleSheet.create({
+    container: {
+        minHeight: Dimensions.get('window').height + 20,
+        backgroundColor: color.default2,
+    },
     topNav: {
         justifyContent: 'center',
         paddingTop: 0,
@@ -9,7 +14,7 @@ const style = StyleSheet.create({
         borderBottomEndRadius: 15,
         borderBottomStartRadius: 15,
     },
-    between:{
+    between: {
         justifyContent: 'space-between',
         padding: 15,
         flexDirection: 'row',
@@ -18,6 +23,21 @@ const style = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 16,
         padding: 15,
+    },
+    img: {
+        width: 50,
+        height: 50,
+        borderRadius: 10,
+    },
+    icons: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+    },
+    title: {
+        fontSize: 28,
+        fontFamily: 'JustAnotherHand-Regular',
+        alignSelf: 'center',
+        color: color.primary,
     },
 });
 

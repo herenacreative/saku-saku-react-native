@@ -21,11 +21,12 @@ const topUp = (state = initialState, action) => {
         errorMsg: "Data rejected"
       };
     case "GET_ALL_TOP_UP_FULFILLED":
+      console.log(action.payload.data, 'pau')
       return {
         ...state,
         isLoading: false,
         isError: false,
-        data: action.payload.data.data.results
+        data: action.payload.data.data
       };
     case "GET_ID_TOP_UP_PENDING":
       return {

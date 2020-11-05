@@ -21,6 +21,7 @@ const users = (state = initialState, action) => {
         errorMsg: "Data rejected"
       };
     case "GET_USER_ALL_FULFILLED":
+      console.log('p', action.payload.data)
       return {
         ...state,
         isLoading: false,
