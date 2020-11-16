@@ -5,24 +5,28 @@ const style = StyleSheet.create({
     button: {
         width: Dimensions.get('window').width - 30,
         alignItems: 'center',
+        alignSelf: 'center',
         padding: 15,
         borderRadius: 15,
     },
     buttonText: {
         fontSize: 16,
     },
-    button2:{
+    button2: {
         width: Dimensions.get('window').width - 30,
-        alignItems: 'baseline',
+        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'space-between',
         flexDirection: 'row',
         padding: 15,
         borderRadius: 15,
         marginVertical: 5,
+        backgroundColor: color.grey,
     },
     buttonText2: {
         fontSize: 16,
-        color: color.light,
+        color: color.dark,
+        fontWeight: 'bold',
     },
 });
 

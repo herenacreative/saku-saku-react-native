@@ -61,6 +61,7 @@ const style = StyleSheet.create({
     row:{
         flexDirection: 'row',
         justifyContent: 'space-between',
+        marginLeft: 10,
     },
     topNav:{
         backgroundColor: color.darkblue,
@@ -111,6 +112,10 @@ const style = StyleSheet.create({
         width: '100%',
         height: 250,
         resizeMode: 'cover',
+    },
+    img2: {
+        width: 50,
+        height: 50,
     },
     //modal
     modalContainer: {

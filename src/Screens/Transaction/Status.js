@@ -1,9 +1,17 @@
-import { CardPhotoText, CardText, CardList, CardIcons, Button } from 'Components';
-import { React, Text, View, Image, TouchableOpacity, useNavigation, SafeAreaView, ScrollView } from 'Libraries';
+import { CardPhotoText, CardText, Button } from 'Components';
+import { React, Text, Image, useEffect, View, connect, useNavigation, ScrollView } from 'Libraries';
 import style from './style';
+import config from 'Configs';
+import Success from '../../Assets/Images/success.svg';
 
-const Status = () => {
+const Status = (props) => {
   const navigation = useNavigation();
+  const { transferId } = props.route.params;
+
+  useEffect(() => {
+    console.log(transferId, 'o', props,)
+  }, [])
+
 
   return (
     <ScrollView>
@@ -15,34 +23,47 @@ const Status = () => {
           />
         </View>
         <View style={style.viewImg}>
-          <Image
+          <Success width={100} height={100} />
+          {/* <Image
             style={style.imgStatus}
             source={{
               uri: 'https://reactnative.dev/img/tiny_logo.png',
             }}
-          />
+          /> */}
           <Text style={style.headline5}>Transfer Success</Text>
         </View>
         <View style={style.card1}>
-          <CardText detail='Income' count='Rp. 21.000.000' />
-          <CardText detail='Expense' count='Rp. 21.000.000' />
+          <CardText detail='Amount' count={props.transfer.data.amount} />
+          <CardText detail='BalanceLeft' count={transferId.balance} />
         </View>
         <View style={style.card1}>
-          <CardText detail='Income' count='Rp. 21.000.000' />
-          <CardText detail='Expense' count='Rp. 21.000.000' />
+          <CardText detail='Date' count={transferId.date} />
+          <CardText detail='Time' count={transferId.time} />
         </View>
         <View style={style.card1}>
-          <CardText detail='Expense' type="fullwidth" count='Rp. 21.000.000' />
+          <CardText detail='Notes' type="fullwidth" count={transferId.notes} />
         </View>
         <Text style={style.subtitlePadding}>From</Text>
         <CardPhotoText
-          name='Samuel Suhi'
-          detail='+62 1231 1213'
+          image={<Image
+            style={style.img}
+            source={{
+              uri: `${config.imgURL}/${props.auth.data.photo}`
+            }}
+          />}
+          name={props.auth.data.fullname}
+          detail={props.auth.data.phone}
         />
         <Text style={style.subtitlePadding}>To</Text>
         <CardPhotoText
-          name='Samuel Suhi'
-          detail='+62 1231 1213'
+          image={<Image
+            style={style.img}
+            source={{
+              uri: `${config.imgURL}/${props.users.data[0].photo}`
+            }}
+          />}
+          name={props.users.data[0].fullname}
+          detail={props.users.data[0].phone}
         />
 
         <View style={style.btnmargin}>
@@ -57,4 +78,10 @@ const Status = () => {
   );
 };
 
-export default Status;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+  transfer: state.transfer,
+  users: state.users,
+});
+
+export default connect(mapStateToProps)(Status);

@@ -1,47 +1,43 @@
-import { React, View, Ionicons, TextInput, Text, useNavigation, Animatable, TouchableOpacity } from 'Libraries';
-import { FormAuth, Button, InputPassword, InputEmail } from 'Components';
+import {
+  React,
+  View,
+  Ionicons,
+  TextInput,
+  Text,
+  Animatable,
+  connect,
+  ToastAndroid,
+} from 'Libraries';
+import {
+  FormAuth,
+  Button,
+  InputPassword,
+  InputEmail
+} from 'Components';
 import style from './style';
 import { color } from 'Assets';
+import { register } from 'Redux/actions';
 
-const SignUp = () => {
-  const navigation = useNavigation();
+const SignUp = (props) => {
   const [data, setData] = React.useState({
     check_textInputChange: false,
     isValidUser: true,
+    email: '',
+    password: '',
+    username: '',
   });
 
-  const textInputChange = val => {
-    if (val.trim().length >= 3) {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
+  const onSubmit = () => {
+    props.dispatch(register(data))
+      .then(res => {
+        console.log(res);
+        props.navigation.navigate('Auth');
+      })
+      .catch((e) => {
+        ToastAndroid.show(e.response.data.message, ToastAndroid.SHORT, ToastAndroid.TOP);
+        console.log(e);
       });
-    } else {
-      setData({
-        ...data,
-        username: val,
-        check_textInputChange: true,
-        isValidUser: true,
-      });
-    }
   };
-
-  const handleValidUser = (val) => {
-    if (val.trim().length >= 3) {
-      setData({
-        ...data,
-        isValidUser: true
-      });
-    } else {
-      setData({
-        ...data,
-        isValidUser: false
-      });
-    }
-  };
-
 
   return (
     <View>
@@ -53,43 +49,61 @@ const SignUp = () => {
         link='Auth'
         content={
           <View style={style.fomrs}>
-
             <View>
               {/* input username */}
               <View style={style.action}>
-                <Ionicons style={style.icons} name='mail-outline' size={25} color={color.primary} />
+                <Ionicons
+                  style={style.icons}
+                  name='person-outline'
+                  size={25}
+                  color={color.primary}
+                />
                 <TextInput
                   placeholderTextColor='#666666'
                   placeholder='Enter your username'
                   autoCapitalize='none'
                   style={style.textInput1}
-                  onChangeText={(val) => handleValidUser(val)}
+                  onChangeText={(val) => setData({ ...data, username: val })}
+                  value={data.username}
                 />
                 {data.check_textInputChange ?
                   <Animatable.View animation='bounceIn'>
-                    <Ionicons style={style.icons} name='checkmark-circle-outline' size={25} color='green' />
+                    <Ionicons
+                      style={style.icons}
+                      name='checkmark-circle-outline'
+                      size={25}
+                      color='green'
+                    />
                   </Animatable.View>
                   : null}
               </View>
               {data.isValidUser ? null :
-                <Animatable.View animation="fadeInLeft" duration={500}>
-                  <Text style={style.errorMsg}>Username must be 3 characters long.</Text>
+                <Animatable.View
+                  animation="fadeInLeft"
+                  duration={500}
+                >
+                  <Text style={style.errorMsg}>
+                    Username must be 3 characters long.
+                  </Text>
                 </Animatable.View>
               }
-              {/* input username */}
-              <View>
-                <InputEmail />
-              </View>
-              <View>
-                <InputPassword/>
-              </View>
+
+              <InputEmail
+                onChangeText={(val) => setData({ ...data, email: val })}
+                value={data.email}
+              />
+              <InputPassword
+                onChangeText={(val) => setData({ ...data, password: val })}
+                value={data.password}
+              />
             </View>
-            
+
             <Button
               title="Sign Up"
               style="primary"
               type="fullwidth"
-              onPress={() => navigation.navigate('CreatePin')}
+              onPress={onSubmit}
+              disabled={data.email.length <= 1 || data.password.length <= 1 || data.username.length <= 1}
             />
           </View>
         }
@@ -98,4 +112,8 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps)(SignUp);

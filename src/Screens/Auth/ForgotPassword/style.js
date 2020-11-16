@@ -14,6 +14,11 @@ const style = StyleSheet.create({
         minHeight: Dimensions.get('window').height - (15 * 26),
         justifyContent: 'space-between',
     },
+    row: {
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginTop: 40,
+    },
 });
 
 export default style;

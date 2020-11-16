@@ -1,5 +1,4 @@
 import { Dimensions, StyleSheet } from 'Libraries';
-import { color } from 'Assets';
 
 const style = StyleSheet.create({
     text: {
@@ -7,8 +6,13 @@ const style = StyleSheet.create({
         marginTop: 15,
     },
     fomrs: {
-        minHeight: Dimensions.get('window').height - (15 * 29),
+        minHeight: Dimensions.get('window').height - (14.5 * 29),
         justifyContent: 'space-between',
+    },
+    row:{
+        alignSelf: 'center',
+        justifyContent: 'center',
+        marginTop: 40,
     },
 });
 

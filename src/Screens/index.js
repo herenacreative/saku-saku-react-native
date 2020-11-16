@@ -1,4 +1,3 @@
-import About from './About';
 import Auth from './Auth';
 import Home from './Home';
 import CreatePin from './Auth/CreatePin';
@@ -10,7 +9,6 @@ import Transfer from './Transaction/Transfer';
 import Confirmation from './Transaction/Confirmation';
 import Status from './Transaction/Status';
 import TopUp from './TopUp';
-import Splash from './Splash';
 import SignUp from './Auth/SignUp';
 import StatusPin from './Auth/SignUp/StatusPin';
 import ForgotPassword2 from './Auth/ForgotPassword/ResetPassword2';
@@ -27,10 +25,14 @@ import UserAdmin from './Admin/UserAdmin';
 import DetailUser from './Admin/DetailUser';
 import TransactionAdmin from './Admin/TransactionAdmin';
 import DetailTransaction from './Admin/DetailTransaction';
+import InputPin from './Transaction/InputPin';
+import OtpResetPassword from './Auth/ForgotPassword/Otp';
+import InputOTP from './Auth/ForgotPassword/InputOTP';
+
 export {
     Dashboard,
+    InputPin,
     Home,
-    About,
     Auth,
     CreatePin,
     ForgotPassword,
@@ -41,7 +43,6 @@ export {
     Confirmation,
     Status,
     TopUp,
-    Splash,
     SignUp,
     StatusPin,
     ForgotPassword2,
@@ -57,4 +58,6 @@ export {
     DetailUser,
     TransactionAdmin,
     DetailTransaction,
+    OtpResetPassword,
+    InputOTP,
 };

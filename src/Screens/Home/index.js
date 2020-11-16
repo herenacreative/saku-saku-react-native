@@ -1,35 +1,75 @@
-import { connect, useState, Image, Animatable, useEffect, StatusBar, React, Text, View, useNavigation, ScrollView, Ionicons } from 'Libraries';
-import { Button, CardPhotoText, CardPhotoTextPrimary } from 'Components';
+import {
+  connect,
+  useState,
+  Image,
+  useEffect,
+  StatusBar,
+  React,
+  Text,
+  View,
+  useNavigation,
+  ScrollView,
+  Ionicons,
+} from 'Libraries';
+import {
+  Button,
+  Empty,
+  CardPhotoText,
+  CardPhotoTextPrimary,
+} from 'Components';
 import style from './style';
 import { color } from 'Assets';
 import { getAllTransfer } from 'Redux/actions';
-import config from '../../Configs/index';
-import Empty from '../../Assets/Images/undraw_empty_xct9.svg';
+import config from 'Configs';
 
 const Home = (props) => {
+  // receiver = penerima
+  // sender = pengirim
+  //props
+  const { tokenLogin, balance, id } = props.auth.data;
+  const { receiver_id, amount } = props.transfer.data;
+  //navigation
   const navigation = useNavigation();
-  const [transfers, setTransfers] = useState([])
+  //state
+  const [transfers, setTransfers] = useState([]);
 
+  //get data transfer
   const getAllTransfers = async () => {
-    const token = props.auth.data.tokenLogin;
-    const id = props.auth.data.id;
-    await props.dispatch(getAllTransfer(token, id))
+    const token = tokenLogin;
+    const idx = id;
+    await props.dispatch(getAllTransfer(token, idx))
       .then(res => {
         setTransfers(res.value.data.data[0]);
       })
       .catch((e) => {
         console.log(e);
+        console.log(e.response);
       });
   };
 
+  // eksekusi balance
+  const test = () => {
+    let countAmount = props.transfer.data.map(item => {
+      const countBalance = parseInt(item.amount)
+      return countBalance;
+    })
+    let sum = countAmount.reduce((x, y) => x + y, 0);
+    const formatMoney = `Rp ${sum}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return formatMoney;
+  }
+  
   useEffect(() => {
     getAllTransfers();
+    console.log('formatMoney', test())
   }, []);
 
   return (
     <ScrollView>
       <View style={style.container}>
-        <StatusBar backgroundColor={color.primary} barStyle="light-content" />
+        <StatusBar
+          backgroundColor={color.primary}
+          barStyle="light-content"
+        />
         <View style={style.topNav}>
           <CardPhotoTextPrimary
             image={<Image
@@ -40,6 +80,7 @@ const Home = (props) => {
             />}
             onPress={() => navigation.navigate('Profile')}
             name="Balance"
+            // detail={test()}
             detail={props.auth.data.balance}
             count={
               <Ionicons
@@ -55,7 +96,11 @@ const Home = (props) => {
           <Button
             title={
               <>
-                <Ionicons name='arrow-up-outline' size={25} color={color.primary} />
+                <Ionicons
+                  name='arrow-up-outline'
+                  size={25}
+                  color={color.primary}
+                />
                 <Text> Transfer</Text>
               </>
             }
@@ -67,7 +112,11 @@ const Home = (props) => {
           <Button
             title={
               <>
-                <Ionicons name='add-outline' size={25} color={color.primary} />
+                <Ionicons
+                  name='add-outline'
+                  size={25}
+                  color={color.primary}
+                />
                 <Text> Top Up</Text>
               </>
             }
@@ -82,9 +131,16 @@ const Home = (props) => {
         {props.transfer.data
           ? props.transfer.data.length > 0
             ? props.transfer.data.map((item, idx) => {
+              //parseInt
+              const countBalance = parseInt(item.amount)
+              //convert to negativeMoney
+              const negativeMoney = -Math.abs(countBalance)
+              //format money
+              const formatMoneyAmountNegative = `Rp ${negativeMoney}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+              const formatMoneyAmountPositive = `Rp ${countBalance}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
               return (
                 <CardPhotoText
-                  onPress={() => navigation.navigate('DetailTransaction', { detailTrans: item.id })}
                   key={idx}
                   image={<Image
                     style={style.img}
@@ -94,22 +150,17 @@ const Home = (props) => {
                   />}
                   name={item.fullname}
                   detail={item.phone}
-                  count={item.amount}
+                  count={item.receiver_id === props.auth.data.id ?
+                    (<Text style={{ color: 'green' }}>+ {formatMoneyAmountPositive}</Text>)
+                    : (<Text style={{ color: 'red' }}> {formatMoneyAmountNegative}</Text>)
+                  }
                 />
               )
             })
-            : <Text>Loading...</Text>
-          : (<Animatable.View animation='bounceIn' duration={6000}>
-            <View style={style.icons} >
-              <Empty width={150} height={150} />
-              <Text style={style.title}>No Data</Text>
-              <Button
-                title='Create Transfer'
-                style="primary"
-                onPress={() => navigation.navigate('Search')}
-                type="primary" />
-            </View>
-          </Animatable.View>)
+            : <Text style={style.textLoading}>
+              Loading...
+              </Text>
+          : <Empty />
         }
       </View>
     </ScrollView>

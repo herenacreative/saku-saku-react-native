@@ -46,6 +46,12 @@ var style = _Libraries.StyleSheet.create({
     fontFamily: 'JustAnotherHand-Regular',
     alignSelf: 'center',
     color: _Assets.color.primary
+  },
+  textLoading: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    fontSize: 30,
+    color: _Assets.color.primary
   }
 });
 

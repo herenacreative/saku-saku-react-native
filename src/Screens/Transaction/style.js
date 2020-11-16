@@ -119,8 +119,8 @@ const style = StyleSheet.create({
     },
     topNav: {
         justifyContent: 'center',
-        paddingTop: 0,
-        height: Dimensions.get('window').height / 6 - 10,
+        // paddingVertical: 5,
+        minHeight: Dimensions.get('window').height / 6,
         backgroundColor: color.primary,
         borderBottomEndRadius: 15,
         borderBottomStartRadius: 15,
@@ -142,7 +142,11 @@ const style = StyleSheet.create({
     betweens: {
         height: Dimensions.get('window').height - 160,
         justifyContent: 'space-between',
-        // flex: 1,
+        marginVertical: 20,
+    },
+    center:{
+        alignItems: 'center',
+        margin: 15,
     },
     action: {
         flexDirection: 'row',
@@ -171,6 +175,11 @@ const style = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold',
         marginTop: 10,
+    },
+    img: {
+        height: 50,
+        width: 50,
+        borderRadius: 10,
     },
     //modal
     modalContainer: {

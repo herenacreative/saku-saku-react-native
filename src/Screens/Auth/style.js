@@ -4,7 +4,7 @@ import { color } from 'Assets';
 const style = StyleSheet.create({
     text:{
         textAlign: 'right',
-        marginTop: 15,
+        marginVertical: 15,
     },
     fomrs: {
         minHeight: Dimensions.get('window').height - (15 * 27),

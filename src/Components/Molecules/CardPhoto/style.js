@@ -19,6 +19,7 @@ const style = StyleSheet.create({
         shadowOpacity: 0.34,
         shadowRadius: 10,
         elevation: 10,
+        flexWrap: "wrap",
     },
     container4: {
         width: Dimensions.get('window').width - 30,

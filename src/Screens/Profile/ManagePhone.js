@@ -1,10 +1,18 @@
-import { Button, InputPassword, CardPhotoTextPrimary, CardText } from 'Components';
-import { Switch, Image, StatusBar, Text, React, useState, View, useNavigation, ScrollView, Ionicons } from 'Libraries';
+import {
+    Text,
+    React,
+    View,
+    useNavigation,
+    ScrollView,
+    Ionicons,
+} from 'Libraries';
+import { CardText } from 'Components';
 import style from './style';
 import { color } from 'Assets';
 
-const ManagePhone = () => {
+const ManagePhone = props => {
     const navigation = useNavigation();
+    const { phone } = props.route.params;
 
     return (
         <ScrollView>
@@ -13,16 +21,17 @@ const ManagePhone = () => {
                     You can only delete the phone number and then you must add another phone number.
                 </Text>
                 <View style={style.between2}>
-                    <CardText detail='Expense' button={<Ionicons name='arrow-forward-outline' size={20} color={color.primary} />} type="fullwidth" count='Rp. 21.000.000'/>
-                    <View style={style.btn}>
-                    <Button
-                        title="Continue"
-                        style="primary"
+                    <CardText
+                        detail='Primary'
+                        button={<Ionicons
+                            onPress={() => navigation.navigate('AddPhone', { phoneNum: phone })}
+                            name='trash-outline'
+                            size={20}
+                            color={color.primary}
+                        />}
                         type="fullwidth"
-                        onPress={() => navigation.navigate('AddPhone')}
-                        />
-
-                    </View>
+                        count={phone}
+                    />
                 </View>
             </View>
         </ScrollView>

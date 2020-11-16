@@ -1,4 +1,14 @@
-import { React, useEffect, useState, connect, Text, View, useNavigation, SafeAreaView, ScrollView } from 'Libraries';
+import {
+  React,
+  useEffect,
+  useState,
+  connect,
+  Text,
+  View,
+  useNavigation,
+  SafeAreaView,
+  ScrollView
+} from 'Libraries';
 import { CardList, CardPhoto } from 'Components';
 import { getAllTopUp } from 'Redux/actions';
 import style from './style';
@@ -31,7 +41,9 @@ const TopUp = (props) => {
             count='2389 081393877946'
           />
         </View>
-        <Text style={style.subtitlePadding}>How to Top-Up</Text>
+        <Text style={style.subtitlePadding}>
+          How to Top-Up
+        </Text>
         {props.topUp.data.map((item, idx) => {
           return (
             <CardList

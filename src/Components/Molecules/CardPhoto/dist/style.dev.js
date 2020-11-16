@@ -26,7 +26,8 @@ var style = _Libraries.StyleSheet.create({
     },
     shadowOpacity: 0.34,
     shadowRadius: 10,
-    elevation: 10
+    elevation: 10,
+    flexWrap: "wrap"
   },
   container4: {
     width: _Libraries.Dimensions.get('window').width - 30,

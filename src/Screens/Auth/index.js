@@ -1,5 +1,18 @@
-import { React, AsyncStorage, useEffect, connect, View, Text, useNavigation, TouchableOpacity } from 'Libraries';
-import { FormAuth, Button, InputPassword, InputEmail } from 'Components';
+import {
+  React,
+  connect,
+  View,
+  Text,
+  useNavigation,
+  TouchableOpacity,
+  ToastAndroid,
+} from 'Libraries';
+import {
+  FormAuth,
+  Button,
+  InputPassword,
+  InputEmail,
+} from 'Components';
 import style from './style';
 import { login } from 'Redux/actions';
 
@@ -8,12 +21,13 @@ const Auth = (props) => {
   const [data, setData] = React.useState({ email: '', password: '' });
 
   const onSubmit = () => {
-    props.login(data)
+    props.dispatch(login(data))
       .then(res => {
-        console.log(res);
+        console.log(res.value.data.data[0])
         props.navigation.navigate('Home');
       })
       .catch((e) => {
+        ToastAndroid.show("Opps email or password is wrong !", ToastAndroid.SHORT, ToastAndroid.TOP);
         console.log(e.response);
       });
   };
@@ -37,7 +51,9 @@ const Auth = (props) => {
                 onChangeText={(val) => setData({ ...data, password: val })}
                 value={data.password}
               />
-              <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')} >
+              <TouchableOpacity
+                onPress={() => navigation.navigate('ForgotPassword')}
+              >
                 <Text style={style.text}>
                   Forgot password ?
                 </Text>
@@ -48,6 +64,7 @@ const Auth = (props) => {
               style="primary"
               type="fullwidth"
               onPress={onSubmit}
+              disabled={data.email.length <= 1 || data.password.length <= 1}
             />
           </View>
         }
@@ -60,6 +77,4 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = { login }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Auth)
+export default connect(mapStateToProps)(Auth);

@@ -1,7 +1,7 @@
 import { axios } from 'Libraries';
 import config from '../../Configs/index';
 
-export const getAllUsers = (token, search, page, limit) => {
+export const getAllUsers = (token, search, page) => {
 	return {
 		type: "GET_USER_ALL",
 		payload: axios({
@@ -10,7 +10,7 @@ export const getAllUsers = (token, search, page, limit) => {
 			params: {
 				search: search,
 				page: page,
-				limit: limit,
+				limit: 15,
 			},
 			headers: {
 				Authorization: token
@@ -40,8 +40,10 @@ export const patchUser = (id, formData, token) => {
 			url: `${config.baseURL}/users/${id}`,
 			data: formData,
 			headers: {
-				Authorization: token
-			}
+				// Accept: 'application/json',
+				// 'Content-Type': 'multipart/form-data',
+				Authorization: token,
+			},
 		})
 	}
 }

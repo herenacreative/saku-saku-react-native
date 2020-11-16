@@ -39,6 +39,12 @@ const style = StyleSheet.create({
         alignSelf: 'center',
         color: color.primary,
     },
+    textLoading:{
+        justifyContent: 'center',
+        alignSelf: 'center',
+        fontSize: 30,
+        color: color.primary,
+    },
 });
 
 export default style;

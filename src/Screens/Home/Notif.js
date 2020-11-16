@@ -1,13 +1,23 @@
-import { connect, Image, Animatable, useEffect, useState, React, Text, View, useNavigation, ScrollView } from 'Libraries';
-import { Button, CardPhotoText } from 'Components';
+import {
+  connect,
+  Image,
+  useEffect,
+  useState,
+  React,
+  Text,
+  View,
+  useNavigation,
+  ScrollView
+} from 'Libraries';
+import { Empty, CardPhotoText } from 'Components';
 import style from './style';
-import Empty from '../../Assets/Images/undraw_empty_xct9.svg';
 import { getAllTransfer } from 'Redux/actions';
 import config from 'Configs';
 
 const Notif = props => {
   const navigation = useNavigation();
-  const [transfers, setTransfers] = useState([])
+  const [transfers, setTransfers] = useState([]);
+  const formatMoney = `Rp ${props.auth.data.balance}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const getAllTransfers = async () => {
     const token = props.auth.data.tokenLogin;
@@ -43,29 +53,21 @@ const Notif = props => {
                       uri: `${config.imgURL}/${item.photo}`
                     }}
                   />}
-                  onPress={() => navigation.navigate('DetailTransaction', { detailTrans: item.id })}
                   name={item.fullname}
                   detail={item.phone}
-                  count={item.amount}
+                  count={item.receiver_id === props.auth.data.id ?
+                    (<Text style={{ color: 'green' }}>+ {formatMoney}</Text>)
+                    : (<Text style={{ color: 'red' }}>- {formatMoney}</Text>)
+                  }
                 />
               )
             })
             : <Text>Loading...</Text>
-          : (<Animatable.View animation='bounceIn' duration={6000}>
-            <View style={style.icons} >
-              <Empty width={150} height={150} />
-              <Text style={style.title}>No Data</Text>
-              <Button
-                title='Create Transfer'
-                style="primary"
-                onPress={() => navigation.navigate('Search')}
-                type="primary" />
-            </View>
-          </Animatable.View>)
+          : <Empty />
         }
         <Text style={style.subtitlePadding}>
           This Week
-            </Text>
+        </Text>
       </View>
     </ScrollView>
   );

@@ -1,4 +1,8 @@
-import { React, View, Text } from 'Libraries';
+import {
+    React,
+    View,
+    Text
+} from 'Libraries';
 
 const TopNav = () => {
     return (
