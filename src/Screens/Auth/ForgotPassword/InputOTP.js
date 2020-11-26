@@ -5,6 +5,7 @@ import {
     SmoothPinCodeInput,
     connect,
     useRef,
+    useEffect,
 } from 'Libraries';
 import {
     FormAuth,
@@ -16,6 +17,7 @@ import { confirmPassword } from 'Redux/actions';
 const InputOTP = (props) => {
     const [code, setCode] = useState('');
     const pinInput = useRef();
+    const { fullname, email, password } = props.route.params
 
     const onSubmit = () => {
         const data = {
@@ -24,12 +26,18 @@ const InputOTP = (props) => {
         props.dispatch(confirmPassword(data))
             .then(res => {
                 console.log(res.value.data.data[0])
-                props.navigation.navigate('ForgotPassowrd2')
+                props.navigation.navigate('ForgotPassowrd2', {
+                    email: props.route.params.email,
+                })
             })
             .catch((e) => {
                 console.log(e.response)
             });
     };
+
+    useEffect(() => {
+        console.log(props.route.params, 'jjj', code)
+    }, [])
 
     return (
         <View>

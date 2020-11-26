@@ -33,7 +33,7 @@ const Transfer = (props) => {
     time: moment().format('LT'),
   });
 
-  const total = props.users.data[0].balance - data.amount
+  const total = props.auth.data.balance - data.amount
   const formatMoney = `Rp ${total}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   const getIDUser = async () => {
@@ -50,6 +50,7 @@ const Transfer = (props) => {
 
   useEffect(() => {
     getIDUser();
+    console.log(props.users.data, 'koko')
   }, []);
 
   return (
@@ -65,7 +66,7 @@ const Transfer = (props) => {
             image={<Image
               style={style.img}
               source={{
-                uri: `${config.imgURL}/${props.users.data[0].photo}`
+                uri: `${config.imgURL}/${props.users.data.photo}`
               }}
             />}
             name={props.users.data[0].fullname}

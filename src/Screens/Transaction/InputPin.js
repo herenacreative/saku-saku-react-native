@@ -17,7 +17,7 @@ import {
 } from 'Libraries';
 import style from './style';
 import config from 'Configs';
-import { postTransfer } from 'Redux/actions';
+import { postTransfer, patchUser } from 'Redux/actions';
 import { Text } from 'Libraries/dist/index.dev';
 
 const InputPin = (props) => {
@@ -27,8 +27,9 @@ const InputPin = (props) => {
 
     const onSubmit = () => {
         if(props.auth.data.pin == code){
-
+            console.log(transferId, 'ttfff')
             const token = props.auth.data.tokenLogin
+            const id = props.auth.data.id
             const data = {
                 'receiver_id': transferId.receiver_id,
                 'sender_id': transferId.sender_id,
@@ -37,8 +38,17 @@ const InputPin = (props) => {
             }
         props.dispatch(postTransfer(token, data))
             .then(res => {
-                console.log(res.value.data.data[0], 'lp');
-                props.navigation.navigate('Status', {transferId});
+                // const formData = {
+                //     'balance': transferId.balance,
+                // }
+                // props.dispatch(patchUser(id, formData, token))
+                // .then(res => {
+                    console.log(res.value.data.data[0], 'lp');
+                    props.navigation.navigate('Status', {transferId});
+                //     })
+                // .catch((e) => {
+                //     console.log(e.response);
+                // });
             })
             .catch((e) => {
                 console.log(e.response);
@@ -82,6 +92,7 @@ const InputPin = (props) => {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
+    users: state.users,
     transfer: state.transfer,
 });
 

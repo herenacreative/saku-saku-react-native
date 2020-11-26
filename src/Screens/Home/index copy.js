@@ -1,10 +1,13 @@
 import {
   connect,
+  useState,
   Image,
+  useEffect,
   StatusBar,
   React,
   Text,
   View,
+  useNavigation,
   ScrollView,
   Ionicons,
   io,
@@ -20,34 +23,34 @@ import { color } from 'Assets';
 import { getAllTransfer } from 'Redux/actions';
 import config from 'Configs';
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      transfers: [],
-
-    }
-  }
+const Home = (props) => {
   // receiver = penerima
   // sender = pengirim
+  //props
+  const { tokenLogin, balance, id } = props.auth.data;
+  const { receiver_id, amount } = props.transfer.data;
+  //navigation
+  const navigation = useNavigation();
+  //state
+  const [transfers, setTransfers] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const socket = io(`${config.serverURL}`);
 
  
 
   //get data transfer
-  getAllTransfers = async () => {
-    const { tokenLogin, balance, id } = this.props.auth.data;
+  const getAllTransfers = async () => {
     const token = tokenLogin;
     const idx = id;
-    this.socket = io(`${config.serverURL}`);
-    await this.props.dispatch(getAllTransfer(token, idx))
+    // let socket = io(`${config.serverURL}`);
+    await props.dispatch(getAllTransfer(token, idx))
       .then(res => {
-        // console.log(this.state, 'res', res.value.data.data)
-        this.socket.emit('message', { data: 'datas' })
-        this.setState({
-          transfers: res.value.data.data
+        socket.emit('transfers', { data: 'datas' })
+        setTransfers({
+          transfers: res.value.data.data[0]
         },
         () => {
-          console.log('this', this.state.transfers)
+          console.log(transfers)
         });
       })
       .catch((e) => {
@@ -56,25 +59,31 @@ class Home extends React.Component {
       });
   };
 
-  componentDidMount() {
-    this.socket = io(`${config.serverURL}`);
-    console.log(this.socket, 'oi')
-    this.socket.on('message', msg => {
+  // eksekusi balance
+  const test = () => {
+    let countAmount = props.transfer.data.map(item => {
+      const countBalance = parseInt(item.amount)
+      return countBalance;
+    })
+    let sum = countAmount.reduce((x, y) => x + y, 0);
+    const formatMoney = `Rp ${sum}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return formatMoney;
+  }
+
+  useEffect(() => {
+    const socket = io(`${config.serverURL}`);
+    socket.on('message', msg => {
       console.log(msg, 'msg')
-      this.setState({
-        transfers: [...this.state.transfers, msg]
+      setTransfers({
+        // transfers: [...transfers, msg]
+        ...transfers,
+        msg
       });
     });
-    this.getAllTransfers();
-  }
-
-  componentWillUnmount(){
-    this.socket.disconnect();
-    this.socket.removeEventListener();
-  }
-
-  render(){
-    console.log(this.state.transfers, 'lo')
+    getAllTransfers();
+    console.log('formatMoney', test())
+  }, []);
+  
   return (
     <ScrollView>
       <View style={style.container}>
@@ -87,17 +96,17 @@ class Home extends React.Component {
             image={<Image
               style={style.img}
               source={{
-                uri: `${config.imgURL}/${this.props.auth.data.photo}`
+                uri: `${config.imgURL}/${props.auth.data.photo}`
               }}
             />}
-            onPress={() => this.props.navigation.navigate('Profile')}
+            onPress={() => navigation.navigate('Profile')}
             name="Balance"
             // detail={test()}
-            detail={this.props.auth.data.balance}
+            detail={props.auth.data.balance}
             count={
               <Ionicons
                 name='notifications-outline'
-                onPress={() => this.props.navigation.navigate('Notif')}
+                onPress={() => navigation.navigate('Notif')}
                 size={25}
                 color={color.light}
               />}
@@ -117,7 +126,7 @@ class Home extends React.Component {
               </>
             }
             style={color.grey}
-            onPress={() => this.props.navigation.navigate('Search')}
+            onPress={() => navigation.navigate('Search')}
             type="primary"
           />
 
@@ -134,16 +143,15 @@ class Home extends React.Component {
             }
             style={color.grey}
             type="primary"
-            onPress={() => this.props.navigation.navigate('TopUp')}
+            onPress={() => navigation.navigate('TopUp')}
           />
         </View>
         <Text style={style.subtitlePadding}>
           Transaction History
         </Text>
-        {this.state.transfers
-          ? this.state.transfers.length > 0
-            ? this.state.transfers.map((item, idx) => {
-              console.log(this.state.transfers, 'transs')
+        {props.transfer.data
+          ? props.transfer.data.length > 0
+            ? props.transfer.data.map((item, idx) => {
               //parseInt
               const countBalance = parseInt(item.amount)
               //convert to negativeMoney
@@ -163,7 +171,7 @@ class Home extends React.Component {
                   />}
                   name={item.fullname}
                   detail={item.phone}
-                  count={item.receiver_id === this.props.auth.data.id ?
+                  count={item.receiver_id === props.auth.data.id ?
                     (<Text style={{ color: 'green' }}>+ {formatMoneyAmountPositive}</Text>)
                     : (<Text style={{ color: 'red' }}> {formatMoneyAmountNegative}</Text>)
                   }
@@ -179,11 +187,10 @@ class Home extends React.Component {
     </ScrollView>
   );
 };
-}
+
 const mapStateToProps = (state) => ({
   auth: state.auth,
   transfer: state.transfer,
 });
-
 
 export default connect(mapStateToProps)(Home);

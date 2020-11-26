@@ -34,8 +34,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import SplashScreen from 'react-native-splash-screen';
 import SmoothPinCodeInput from 'react-native-smooth-pincode-input';
 import ImagePicker from 'react-native-image-picker';
+import messaging from '@react-native-firebase/messaging';
 import { Provider } from 'react-redux';
 import { connect } from 'react-redux';
+import { io } from 'socket.io-client';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 import { Formik } from 'formik';
@@ -85,6 +87,7 @@ export {
     axios,
     moment,
     Animatable,
+    messaging,
     LinearGradient,
     logger,
     AsyncStorage,
@@ -96,6 +99,7 @@ export {
     SmoothPinCodeInput,
     ImagePicker,
     Formik,
+    io,
 };
 
 export * from 'react';

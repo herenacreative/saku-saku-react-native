@@ -3,10 +3,27 @@ import { React, Text, Image, useEffect, View, connect, useNavigation, ScrollView
 import style from './style';
 import config from 'Configs';
 import Success from '../../Assets/Images/success.svg';
+import { patchUser } from 'Redux/actions';
 
 const Status = (props) => {
   const navigation = useNavigation();
   const { transferId } = props.route.params;
+
+  const onSubmit = () => {
+    const id = props.auth.data.id
+    const token = props.auth.data.tokenLogin
+    const formData = {
+      'balance': transferId.balance,
+    }
+    props.dispatch(patchUser(id, formData, token))
+      .then(res => {
+        console.log(res.value.data.data)
+        props.navigation.navigate('Home')
+      })
+      .catch((e) => {
+        console.log(e.response)
+      });
+  };
 
   useEffect(() => {
     console.log(transferId, 'o', props,)

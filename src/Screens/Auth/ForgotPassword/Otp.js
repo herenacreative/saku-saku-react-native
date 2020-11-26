@@ -24,7 +24,9 @@ const OtpResetPassword = (props) => {
         props.dispatch(confirmPassword(data))
             .then(res => {
                 console.log(res.value.data.data[0])
-                props.navigation.navigate('ForgotPassowrd2')
+                props.navigation.navigate('ForgotPassowrd2', {
+                    email: props.route.params.email,
+                })
             })
             .catch((e) => {
                 console.log(e.response)

@@ -39,10 +39,13 @@ var _exportNames = {
   SplashScreen: true,
   SmoothPinCodeInput: true,
   ImagePicker: true,
+  messaging: true,
   Provider: true,
   connect: true,
+  io: true,
   logger: true,
   thunk: true,
+  Formik: true,
   moment: true,
   axios: true
 };
@@ -238,6 +241,12 @@ Object.defineProperty(exports, "ImagePicker", {
     return _reactNativeImagePicker["default"];
   }
 });
+Object.defineProperty(exports, "messaging", {
+  enumerable: true,
+  get: function get() {
+    return _messaging["default"];
+  }
+});
 Object.defineProperty(exports, "Provider", {
   enumerable: true,
   get: function get() {
@@ -250,6 +259,12 @@ Object.defineProperty(exports, "connect", {
     return _reactRedux.connect;
   }
 });
+Object.defineProperty(exports, "io", {
+  enumerable: true,
+  get: function get() {
+    return _socket.io;
+  }
+});
 Object.defineProperty(exports, "logger", {
   enumerable: true,
   get: function get() {
@@ -260,6 +275,12 @@ Object.defineProperty(exports, "thunk", {
   enumerable: true,
   get: function get() {
     return _reduxThunk["default"];
+  }
+});
+Object.defineProperty(exports, "Formik", {
+  enumerable: true,
+  get: function get() {
+    return _formik.Formik;
   }
 });
 Object.defineProperty(exports, "moment", {
@@ -347,11 +368,17 @@ var _reactNativeSmoothPincodeInput = _interopRequireDefault(require("react-nativ
 
 var _reactNativeImagePicker = _interopRequireDefault(require("react-native-image-picker"));
 
+var _messaging = _interopRequireDefault(require("@react-native-firebase/messaging"));
+
 var _reactRedux = require("react-redux");
+
+var _socket = require("socket.io-client");
 
 var _reduxLogger = _interopRequireDefault(require("redux-logger"));
 
 var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
+
+var _formik = require("formik");
 
 var _moment = _interopRequireDefault(require("moment"));
 

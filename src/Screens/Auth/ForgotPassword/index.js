@@ -1,8 +1,6 @@
 import {
   React,
   View,
-  useNavigation,
-  useEffect,
   ToastAndroid,
   connect,
 } from 'Libraries';
@@ -11,33 +9,27 @@ import { requestPassword } from 'Redux/actions';
 import style from './style';
 
 const ForgotPassword = (props) => {
-  const navigation = useNavigation();
-  const [data, setData] = React.useState({ email: '', requestType: 'requestType' });
+  const [data, setData] = React.useState({
+    email: '',
+  });
 
-  const onReset = async () => {
-    await props.dispatch(requestPassword(data))
+  const onReset = () => {
+    const datas = {
+      'email' : data.email,
+      'requestPassword': 'resetPassword',
+    };
+    props.dispatch(requestPassword(datas))
       .then(res => {
-        // props.navigation.reset({
-        //   index: 0,
-        //   routes: [{ name: 'InputOTP' }]
-        // })
-
-        // props.navigation.push('OtpResetPassword', { email: data.email, form: 'resetpassword' });
-        // props.navigation.navigate("InputOTP")
-        props.navigation.replace('Auth')
         console.log(res.value.data.data)
-        // return res
+        props.navigation.navigate('InputOTP', {
+          email: data.email, form: 'resetpassword'
+        });
       })
       .catch((e) => {
         ToastAndroid.show("Opps email is wrong !", ToastAndroid.SHORT, ToastAndroid.TOP);
-        console.log(e.response);
         console.log(e)
       });
   };
-
-  useEffect(() => {
-    console.log(props, 'kokoko')
-  })
 
   return (
     <View>
@@ -56,7 +48,7 @@ const ForgotPassword = (props) => {
               title="Confirm"
               style="primary"
               type="fullwidth"
-              onPress={onReset}
+              onPress={()=>onReset()}
             />
           </View>
         }

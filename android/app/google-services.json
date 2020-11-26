@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "248280390177",
+    "firebase_url": "https://saku-saku-df0a9.firebaseio.com",
+    "project_id": "saku-saku-df0a9",
+    "storage_bucket": "saku-saku-df0a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:248280390177:android:c1e32c81ce08af43fba160",
+        "android_client_info": {
+          "package_name": "com.temprnew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "248280390177-er91ctacgdmttv04jdovo2cgnto7hts3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHDFnXp0ZBhwGVudReycB1xPnd48Y99PA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248280390177-er91ctacgdmttv04jdovo2cgnto7hts3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

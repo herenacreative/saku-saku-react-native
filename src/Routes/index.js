@@ -3,6 +3,10 @@ import {
    React,
    connect,
    Ionicons,
+   messaging,
+   useState,
+   useEffect,
+   useNavigation,
    NavigationContainer,
    createStackNavigator,
    createDrawerNavigator,
@@ -47,6 +51,37 @@ const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
 const Routes = (props) => {
+   const [loading, setLoading] = React.useState(true);
+   const [initialRoute, setInitialRoute] = React.useState('Auth');
+
+   React.useEffect(() => {
+      messaging().onNotificationOpenedApp(remoteMessage => {
+         console.log(
+            'Notification caused app to open from background state:',
+            remoteMessage.notification,
+         );
+         navigation.navigate(remoteMessage.data.type);
+      });
+
+      // Check whether an initial notification is available
+      messaging()
+         .getInitialNotification()
+         .then(remoteMessage => {
+            if (remoteMessage) {
+               console.log(
+                  'Notification caused app to open from quit state:',
+                  remoteMessage.notification,
+               );
+               setInitialRoute(initialRoute); 
+            }
+            setLoading(false);
+         });
+   }, []);
+
+   if (loading) {
+      return null;
+   }
+   
    return (
       <NavigationContainer>
          <Stack.Navigator
@@ -256,6 +291,16 @@ const Routes = (props) => {
                                     title: 'Detail Transaction',
                                  }}
                               />
+                              <Stack.Screen
+                                 name='InputOTP'
+                                 component={InputOTP}
+                                 options={{ headerShown: false }}
+                              />
+                              {/* <Stack.Screen
+                                 name="ForgotPassword2"
+                                 component={ForgotPassword2}
+                                 options={{ headerShown: false }}
+                              /> */}
                            </>
                         )
                   ) : (
@@ -270,13 +315,10 @@ const Routes = (props) => {
                         component={StatusPin}
                         options={{ headerShown: false }}
                      />
-                     {/* <Stack.Screen
-                        name= 'OtpResetPassword'
-                        component= {OtpResetPassword}
-                     /> */}
                      <Stack.Screen
                         name='InputOTP'
                         component={InputOTP}
+                        options={{ headerShown: false }}
                      />
                      <Stack.Screen
                         name="ForgotPassword"
