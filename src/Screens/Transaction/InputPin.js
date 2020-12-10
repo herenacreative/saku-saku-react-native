@@ -14,6 +14,7 @@ import {
     useState,
     useRef,
     SmoothPinCodeInput,
+    io,
 } from 'Libraries';
 import style from './style';
 import config from 'Configs';
@@ -24,8 +25,10 @@ const InputPin = (props) => {
     const { transferId } = props.route.params;
     const [code, setCode] = useState('');
     const pinInput = useRef();
-
+    const socket = io(`${config.serverURL}`)
+    
     const onSubmit = () => {
+        // const socket = io(`${config.serverURL}`)
         if(props.auth.data.pin == code){
             console.log(transferId, 'ttfff')
             const token = props.auth.data.tokenLogin
@@ -38,6 +41,7 @@ const InputPin = (props) => {
             }
         props.dispatch(postTransfer(token, data))
             .then(res => {
+                socket.emit('message', {data: 'data transfer'})
                 // const formData = {
                 //     'balance': transferId.balance,
                 // }
@@ -60,6 +64,8 @@ const InputPin = (props) => {
     };
 
     useEffect(() => {
+        socket.removeAllListeners();
+        socket.disconnect();
       console.log(transferId, 'o', props, 'l', code )
     }, [])
 

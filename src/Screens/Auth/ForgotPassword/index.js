@@ -11,18 +11,15 @@ import style from './style';
 const ForgotPassword = (props) => {
   const [data, setData] = React.useState({
     email: '',
+    // requestType: 'resetPassword',
   });
 
   const onReset = () => {
-    const datas = {
-      'email' : data.email,
-      'requestPassword': 'resetPassword',
-    };
-    props.dispatch(requestPassword(datas))
+    props.dispatch(requestPassword(data.email))
       .then(res => {
         console.log(res.value.data.data)
         props.navigation.navigate('InputOTP', {
-          email: data.email, form: 'resetpassword'
+          email: data.email, requestType: 'resetpassword'
         });
       })
       .catch((e) => {

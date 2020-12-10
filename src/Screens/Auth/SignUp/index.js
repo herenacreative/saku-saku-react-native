@@ -103,7 +103,7 @@ const SignUp = (props) => {
               style="primary"
               type="fullwidth"
               onPress={onSubmit}
-              disabled={data.email.length <= 1 || data.password.length <= 1 || data.username.length <= 1}
+              // disabled={data.email.length <= 1 || data.password.length <= 1 || data.username.length <= 1}
             />
           </View>
         }

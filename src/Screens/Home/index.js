@@ -42,7 +42,7 @@ class Home extends React.Component {
     await this.props.dispatch(getAllTransfer(token, idx))
       .then(res => {
         // console.log(this.state, 'res', res.value.data.data)
-        this.socket.emit('message', { data: 'datas' })
+        this.socket.emit('message', { transfers: 'message' })
         this.setState({
           transfers: res.value.data.data
         },

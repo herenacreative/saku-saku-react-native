@@ -43,8 +43,8 @@ export const requestPassword = data => {
          method: 'POST',
          url: `${config.baseURL}/auth/request/otp`,
          data: {
-            email: data.email,
-            requestPassword: data.requestPassword,
+            email: data,
+            requestType: 'resetPassword',
          }
       })
    }

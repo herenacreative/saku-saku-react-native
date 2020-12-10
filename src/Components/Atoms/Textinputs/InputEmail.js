@@ -14,6 +14,7 @@ const InputEmail = (props) => {
    const [data, setData] = React.useState({
       check_textInputChange: false,
       isValidUser: true,
+      active: true,
    });
 
    return (
@@ -31,7 +32,8 @@ const InputEmail = (props) => {
                placeholderTextColor='#666666'
                placeholder='Enter your e-mail'
                autoCapitalize='none'
-               style={style.textInput1}
+               style={[style.textInput1, { borderBottomColor: data.active ? color.primary : '#C0C0C0' }]}
+               // style={style.textInput1}
             />
             {data.check_textInputChange ?
                <Animatable.View animation='bounceIn'>
@@ -59,21 +61,3 @@ const InputEmail = (props) => {
 };
 
 export default InputEmail;
-
-  // const handleValidUser = (val) => {
-  //   if (val.trim().length >= 3) {
-  //     setData({
-  //       ...data,
-  //       isValidUser: true,
-
-  //       check_textInputChange: true,
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       isValidUser: false,
-
-  //       check_textInputChange: true,
-  //     });
-  //   }
-  // };

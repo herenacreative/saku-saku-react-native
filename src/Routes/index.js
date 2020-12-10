@@ -101,11 +101,6 @@ const Routes = (props) => {
                         component={CreatePin}
                         options={{ headerShown: false }}
                      />
-                     {/* <Stack.Screen
-                        name="OtpResetPassword"
-                        component={OtpResetPassword}
-                        options={{ headerShown: false }}
-                     /> */}
                      <Stack.Screen
                         name="StatusPin"
                         component={StatusPin}
@@ -114,6 +109,11 @@ const Routes = (props) => {
                      <Stack.Screen
                         name="Login"
                         component={Auth}
+                        options={{ headerShown: false }}
+                     />
+                     <Stack.Screen
+                        name="ForgotPassword22"
+                        component={ForgotPassword2}
                         options={{ headerShown: false }}
                      />
                   </>
@@ -267,6 +267,11 @@ const Routes = (props) => {
                               component={Auth}
                               options={{ headerShown: false }}
                            />
+                           {/* <Stack.Screen
+                              name="ForgotPassword2"
+                              component={ForgotPassword2}
+                              options={{ headerShown: false }}
+                           /> */}
                         </>
                      ) : (
                            <>
@@ -331,7 +336,7 @@ const Routes = (props) => {
                         options={{ headerShown: false }}
                      />
                      <Stack.Screen
-                        name="ForgotPassword2"
+                        name="ForgotPassword22"
                         component={ForgotPassword2}
                         options={{ headerShown: false }}
                      />
