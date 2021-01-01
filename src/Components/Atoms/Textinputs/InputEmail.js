@@ -33,7 +33,7 @@ const InputEmail = (props) => {
                placeholder='Enter your e-mail'
                autoCapitalize='none'
                style={[style.textInput1, { borderBottomColor: data.active ? color.primary : '#C0C0C0' }]}
-               // style={style.textInput1}
+            // style={style.textInput1}
             />
             {data.check_textInputChange ?
                <Animatable.View animation='bounceIn'>

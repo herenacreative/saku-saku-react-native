@@ -16,7 +16,7 @@ var login = function login(data) {
     type: "LOGIN",
     payload: (0, _Libraries.axios)({
       method: 'POST',
-      url: "".concat(_index["default"].baseURL, "/auth/login"),
+      url: "".concat(_index["default"].baseURL, "/login"),
       data: {
         email: data.email,
         password: data.password
@@ -40,7 +40,7 @@ var register = function register(data) {
     type: "REGISTER",
     payload: (0, _Libraries.axios)({
       method: 'POST',
-      url: "".concat(_index["default"].baseURL, "/auth/sign-up"),
+      url: "".concat(_index["default"].baseURL, "/sign-up"),
       data: {
         username: data.username,
         email: data.email,
@@ -59,8 +59,8 @@ var requestPassword = function requestPassword(data) {
       method: 'POST',
       url: "".concat(_index["default"].baseURL, "/auth/request/otp"),
       data: {
-        email: data.email,
-        requestPassword: data.requestPassword
+        email: data,
+        requestType: 'resetPassword'
       }
     })
   };

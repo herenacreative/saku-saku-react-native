@@ -33,10 +33,3 @@ const Button2 = props => {
 };
 
 export default Button2;
-
-{/* <LinearGradient
-          style={style.button2}
-          colors={[color.default, color.primary]}
-          animation='slideInDown'
-        > */}
-{/* </LinearGradient> */ }

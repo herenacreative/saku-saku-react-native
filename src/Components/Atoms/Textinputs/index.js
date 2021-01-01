@@ -78,19 +78,3 @@ const InputPassword = (props) => {
 };
 
 export default InputPassword;
-
-  // const handlePasswordChange = (val) => {
-  //   if (val.trim().length >= 3) {
-  //     setData({
-  //       ...data,
-  //       password: val,
-  //       isValidPassword: true
-  //     });
-  //   } else {
-  //     setData({
-  //       ...data,
-  //       password: val,
-  //       isValidPassword: false
-  //     });
-  //   }
-  // };

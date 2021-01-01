@@ -6,7 +6,7 @@ export const login = data => {
       type: "LOGIN",
       payload: axios({
          method: 'POST',
-         url: `${config.baseURL}/auth/login`,
+         url: `${config.baseURL}/login`,
          data: {
             email: data.email,
             password: data.password,
@@ -26,7 +26,7 @@ export const register = (data) => {
       type: "REGISTER",
       payload: axios({
          method: 'POST',
-         url: `${config.baseURL}/auth/sign-up`,
+         url: `${config.baseURL}/sign-up`,
          data: {
             username: data.username,
             email: data.email,
